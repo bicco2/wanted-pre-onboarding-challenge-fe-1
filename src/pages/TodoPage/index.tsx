@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Home from "src/assets/home.svg";
+import React, { useEffect, useState, useRef } from "react";
+
 import { Wrapper, Label, Input } from "./styled";
 import axios from "axios";
+import ToDoListItem from "./components/TodoListItem";
 // import { FooterWrapper, FooterItemWrapper, FooterItem } from "./styled";
 
 interface TodoData {
@@ -14,6 +15,7 @@ interface TodoData {
 
 const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/todos", {
@@ -32,7 +34,7 @@ const TodoPage: React.FC = () => {
       <Label>TodoList</Label>
       <ul>
         {todos.map((todo: TodoData) => (
-          <li key={todo.id}>{todo.title}</li>
+          <ToDoListItem todo={todo} key={todo.id} />
         ))}
       </ul>
       <Input></Input>
