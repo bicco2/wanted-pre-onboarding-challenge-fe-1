@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const RowDiv = styled.div`
   display: flex;
   flex-direction: row;
+  width: 250px;
 `;
 
 export const ButtonImg = styled.img`
@@ -31,14 +32,15 @@ export const Button = styled.button`
 
 export const TitleParam = styled.p`
   margin-right: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const ContainerForBtn = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-//-----
 
 export const ModalBackdrop = styled.div`
   width: 400px;
