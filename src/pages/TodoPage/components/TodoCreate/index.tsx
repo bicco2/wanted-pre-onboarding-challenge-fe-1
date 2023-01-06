@@ -10,14 +10,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
 
-function TodoCreate(refetch) {
+function TodoCreate({ refetch }: any) {
   const [open, setOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
 
   const onToggle = () => setOpen(!open);
-  const onTitleChange = (e) => setTitleValue(e.target.value);
-  const onContentChange = (e) => setContentValue(e.target.value);
+  const onTitleChange = (e: any) => setTitleValue(e.target.value);
+  const onContentChange = (e: any) => setContentValue(e.target.value);
   const onSubmit = () => {
     mutation.mutate();
     setOpen(false);
@@ -26,8 +26,8 @@ function TodoCreate(refetch) {
     refetch();
   };
 
-  const onCreateTodo = () => {
-    axios.post(
+  const onCreateTodo = async () => {
+    await axios.post(
       "http://localhost:8080/todos",
       {
         title: titleValue,
