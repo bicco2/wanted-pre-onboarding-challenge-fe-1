@@ -1,3 +1,4 @@
+import TodoItemPage from "pages/TodoItemPage";
 import { lazy } from "react";
 import GlobalLayout from "./pages/_layout";
 
@@ -11,6 +12,7 @@ export const routes = [
     children: [
       { path: "/auth", element: <UserPage /> },
       { path: "/todo", element: <TodoPage /> },
+      { path: "/todo/:id", element: <TodoItemPage /> },
     ],
   },
 ];
