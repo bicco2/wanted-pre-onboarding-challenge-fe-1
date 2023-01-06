@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-
 import { Wrapper, Label } from "./styled";
-import axios from "axios";
 import ToDoListItem from "./components/TodoListItem";
 import TodoCreate from "./components/TodoCreate";
+
+import axios from "axios";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 
 interface TodoData {
@@ -30,7 +30,6 @@ const TodoPage: React.FC = () => {
     "TodoList",
     getTodoListAxios,
     {
-      retry: 3,
       onSuccess: (data) => {
         setTodos(data.data.data);
       },
