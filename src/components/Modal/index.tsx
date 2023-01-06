@@ -1,5 +1,4 @@
 import EditImg from "../../assets/editimg.svg";
-import SaveImg from "../../assets/saveimg.svg";
 import EscImg from "../../assets/escimg.svg";
 
 import { useState } from "react";
@@ -56,9 +55,8 @@ export const ModalView = styled.div.attrs((props) => ({
 export const Input = styled.input`
   padding: 12px;
   border-radius: 4px;
-  border: 1px solid #dee2e6;
+  border: 0.1px solid #dee2e6;
   width: 100%;
-  outline: none;
   font-size: 18px;
   box-sizing: border-box;
 `;
@@ -122,9 +120,10 @@ export const Modal = (props: any) => {
         },
       }
     );
-    alert("수정 완료");
-    setEditToggle(true);
-    close();
+    if (editToggle === false) {
+      alert("수정 완료");
+    }
+    setEditToggle(!editToggle);
   };
 
   const handleClose = () => {
@@ -153,12 +152,10 @@ export const Modal = (props: any) => {
               placeholder="할 일을 입력하세요"
             />
             <BtnContainer>
-              <Button onClick={() => setEditToggle(!editToggle)}>
+              <Button onClick={updateTodoItem}>
                 <ButtonImg src={EditImg} />
               </Button>
-              <Button onClick={() => updateTodoItem()}>
-                <ButtonImg src={SaveImg} />
-              </Button>
+
               <Button onClick={handleClose}>
                 <ButtonImg src={EscImg} />
               </Button>
