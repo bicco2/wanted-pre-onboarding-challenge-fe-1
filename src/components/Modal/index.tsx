@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ModalContainer = styled.div`
   width: 100vw;
@@ -44,22 +44,56 @@ export const ModalView = styled.div.attrs((props) => ({
   color: #4000c7;
 `;
 
+export const Input = styled.input`
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  box-sizing: border-box;
+`;
+
+export const EditButton = styled("button")<{ edit: boolean }>`
+  ${(props) =>
+    props.edit &&
+    css`
+      input: disabled;
+      background: #ff6b6b;
+    `}
+`;
+
 export const Modal = (props: any) => {
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const openModalHandler = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
   const { open, close, title, content } = props;
+
+  const [editToggle, setEditToggle] = useState(true);
+
+  const [titleValue, setTitleValue] = useState(title);
+  const [contentValue, setContentValue] = useState(content);
+  const onTitleChange = (e: any) => setTitleValue(e.target.value);
+  const onContentChange = (e: any) => setContentValue(e.target.value);
 
   return (
     <div>
       {open ? (
         <ModalBackdrop>
           <ModalView>
-            <div>{title}</div>
-            <div>{content}</div>
+            <Input
+              disabled={editToggle ? true : false}
+              autoFocus
+              onChange={onTitleChange}
+              value={titleValue}
+              placeholder="할 일을 입력하세요"
+            />
+            <Input
+              disabled={editToggle ? true : false}
+              onChange={onContentChange}
+              value={contentValue}
+              placeholder="할 일을 입력하세요"
+            />
+            <EditButton edit={true} onClick={() => setEditToggle(!editToggle)}>
+              edit
+            </EditButton>
             <div onClick={close}>&times;</div>
           </ModalView>
         </ModalBackdrop>

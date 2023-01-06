@@ -27,12 +27,6 @@ export default function ToDoListItem(props: any) {
     });
   };
 
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const openModalHandler = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -42,15 +36,12 @@ export default function ToDoListItem(props: any) {
     setModalOpen(false);
   };
 
-  // const url = `/todo/${id}`;
   return (
     <RowDiv>
       <li onClick={openModal}>
-        {/* <Link to={url} state={{ itemID: id }}> */}
         <RowDiv>
           <TitleParam>{title}</TitleParam>
         </RowDiv>
-        {/* </Link> */}
       </li>
       <RowDiv>
         <ContainerForBtn>
