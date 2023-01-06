@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Wrapper, Label, Input } from "./styled";
 import axios from "axios";
 import ToDoListItem from "./components/TodoListItem";
+import TodoCreate from "./components/TodoCreate";
 // import { FooterWrapper, FooterItemWrapper, FooterItem } from "./styled";
 
 interface TodoData {
@@ -37,7 +38,7 @@ const TodoPage: React.FC = () => {
           <ToDoListItem todo={todo} key={todo.id} />
         ))}
       </ul>
-      <Input></Input>
+      <TodoCreate />
     </Wrapper>
   );
 };
