@@ -1,4 +1,3 @@
-import EditImg from "../../../../assets/editimg.svg";
 import DeleteImg from "../../../../assets/deleteimg.svg";
 
 import {
@@ -45,11 +44,6 @@ export default function ToDoListItem(props: any) {
       </li>
       <RowDiv>
         <ContainerForBtn>
-          <Button>
-            <ButtonImg src={EditImg} />
-          </Button>
-        </ContainerForBtn>
-        <ContainerForBtn>
           <Button onClick={deleteTodoItem}>
             <ButtonImg src={DeleteImg} />
           </Button>
@@ -61,6 +55,7 @@ export default function ToDoListItem(props: any) {
         close={closeModal}
         title={title}
         content={content}
+        id={id}
       />
     </RowDiv>
   );

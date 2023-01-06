@@ -1,5 +1,10 @@
+import EditImg from "../../assets/editimg.svg";
+import SaveImg from "../../assets/saveimg.svg";
+import EscImg from "../../assets/escimg.svg";
+
 import { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import axios from "axios";
 
 export const ModalContainer = styled.div`
   width: 100vw;
@@ -36,6 +41,10 @@ export const ModalBackdrop = styled.div`
 export const ModalView = styled.div.attrs((props) => ({
   role: "dialog",
 }))`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
   text-decoration: none;
   padding: 30px 90px;
@@ -54,17 +63,44 @@ export const Input = styled.input`
   box-sizing: border-box;
 `;
 
-export const EditButton = styled("button")<{ edit: boolean }>`
-  ${(props) =>
-    props.edit &&
-    css`
-      input: disabled;
-      background: #ff6b6b;
-    `}
+export const ButtonImg = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+export const Button = styled.button`
+  all: unset;
+  display: flex;
+  width: fit;
+  height: fit;
+  border-radius: 20px;
+  margin-right: 1rem;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 1rem;
+  margin-left: 1rem;
+`;
+
+export const CloseBtn = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Modal = (props: any) => {
-  const { open, close, title, content } = props;
+  const { open, close, title, content, id } = props;
 
   const [editToggle, setEditToggle] = useState(true);
 
@@ -73,11 +109,35 @@ export const Modal = (props: any) => {
   const onTitleChange = (e: any) => setTitleValue(e.target.value);
   const onContentChange = (e: any) => setContentValue(e.target.value);
 
+  const updateTodoItem = async () => {
+    await axios.put(
+      `http://localhost:8080/todos/${id}`,
+      {
+        title: titleValue,
+        content: contentValue,
+      },
+      {
+        headers: {
+          Authorization: `eyJhbGciOiJIUzI1NiJ9.dGVzdEBuYXZlci5jb20.mRAKd_fmy6r-v-6qNRhetzamOAjB890YhRrLKzGbsxs`,
+        },
+      }
+    );
+    alert("수정 완료");
+    setEditToggle(true);
+    close();
+  };
+
+  const handleClose = () => {
+    setEditToggle(true);
+    close();
+  };
+
   return (
     <div>
       {open ? (
         <ModalBackdrop>
           <ModalView>
+            title
             <Input
               disabled={editToggle ? true : false}
               autoFocus
@@ -85,16 +145,24 @@ export const Modal = (props: any) => {
               value={titleValue}
               placeholder="할 일을 입력하세요"
             />
+            content
             <Input
               disabled={editToggle ? true : false}
               onChange={onContentChange}
               value={contentValue}
               placeholder="할 일을 입력하세요"
             />
-            <EditButton edit={true} onClick={() => setEditToggle(!editToggle)}>
-              edit
-            </EditButton>
-            <div onClick={close}>&times;</div>
+            <BtnContainer>
+              <Button onClick={() => setEditToggle(!editToggle)}>
+                <ButtonImg src={EditImg} />
+              </Button>
+              <Button onClick={() => updateTodoItem()}>
+                <ButtonImg src={SaveImg} />
+              </Button>
+              <Button onClick={handleClose}>
+                <ButtonImg src={EscImg} />
+              </Button>
+            </BtnContainer>
           </ModalView>
         </ModalBackdrop>
       ) : null}
