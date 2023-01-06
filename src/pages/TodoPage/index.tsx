@@ -36,7 +36,7 @@ const TodoPage: React.FC = () => {
   return (
     <Wrapper>
       <Label>TodoList</Label>
-      <ul>
+      <ul style={{ marginRight: 30 }}>
         {todos.map((todo: TodoData) => (
           <ToDoListItem todo={todo} key={todo.id} />
         ))}
