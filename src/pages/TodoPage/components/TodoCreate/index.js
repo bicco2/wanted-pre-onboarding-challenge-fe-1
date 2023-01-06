@@ -8,8 +8,9 @@ import {
   CircleButton,
 } from "./styled";
 import axios from "axios";
+import { useMutation, useQueryClient } from "react-query";
 
-function TodoCreate() {
+function TodoCreate(refetch) {
   const [open, setOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
@@ -17,12 +18,12 @@ function TodoCreate() {
   const onToggle = () => setOpen(!open);
   const onTitleChange = (e) => setTitleValue(e.target.value);
   const onContentChange = (e) => setContentValue(e.target.value);
-  const onSubmit = (e) => {
-    console.log("submit");
-    onCreateTodo();
+  const onSubmit = () => {
+    mutation.mutate();
     setOpen(false);
     setTitleValue("");
     setContentValue("");
+    refetch();
   };
 
   const onCreateTodo = () => {
@@ -39,6 +40,15 @@ function TodoCreate() {
       }
     );
   };
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(onCreateTodo, {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries("TodoList");
+      // queryClient.setQueryData('TodoList', data)
+    },
+  });
 
   return (
     <>
