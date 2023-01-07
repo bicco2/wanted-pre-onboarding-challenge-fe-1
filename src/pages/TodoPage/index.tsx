@@ -6,7 +6,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { TodoData } from "customTypes";
-import { Modal } from "components/Modal";
 
 const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState([]);

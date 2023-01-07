@@ -23,7 +23,7 @@ function TodoCreate({ refetch }: any) {
     setOpen(false);
     setTitleValue("");
     setContentValue("");
-    refetch();
+    // refetch();
   };
 
   const onCreateTodo = async () => {

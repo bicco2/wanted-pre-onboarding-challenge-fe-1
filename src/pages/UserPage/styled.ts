@@ -11,14 +11,15 @@ export const Wrapper = styled.div`
 export const Label = styled.label`
   font-size: 2rem;
   margin-bottom: 0.25rem;
-  width: fit-content; ;
+  width: fit-content;
+  padding: 1rem;
 `;
 
 export const Input = styled.input`
   width: 400px;
   border: 1px solid;
   outline: none;
-  border-radius: 0px;
+  border-radius: 10px;
   line-height: 2.5rem;
   font-size: 1.2rem;
   padding-left: 0.5rem;
