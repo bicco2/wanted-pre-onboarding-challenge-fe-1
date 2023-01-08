@@ -22,6 +22,8 @@ export const Modal = (props: any) => {
   const onTitleChange = (e: any) => setTitleValue(e.target.value);
   const onContentChange = (e: any) => setContentValue(e.target.value);
 
+  const ACCESS_TOKEN = localStorage.getItem("accessToken");
+
   const updateTodoItem = async () => {
     await axios.put(
       `http://localhost:8080/todos/${id}`,
@@ -31,7 +33,7 @@ export const Modal = (props: any) => {
       },
       {
         headers: {
-          Authorization: `eyJhbGciOiJIUzI1NiJ9.dGVzdEBuYXZlci5jb20.mRAKd_fmy6r-v-6qNRhetzamOAjB890YhRrLKzGbsxs`,
+          Authorization: ACCESS_TOKEN,
         },
       }
     );

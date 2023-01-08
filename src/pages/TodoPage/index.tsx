@@ -9,11 +9,12 @@ import { TodoData } from "customTypes";
 
 const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState([]);
+  const ACCESS_TOKEN = localStorage.getItem("accessToken");
 
   const getTodoListAxios = async () => {
     const data = axios.get("http://localhost:8080/todos", {
       headers: {
-        Authorization: `eyJhbGciOiJIUzI1NiJ9.dGVzdEBuYXZlci5jb20.mRAKd_fmy6r-v-6qNRhetzamOAjB890YhRrLKzGbsxs`,
+        Authorization: ACCESS_TOKEN,
       },
     });
     return data;

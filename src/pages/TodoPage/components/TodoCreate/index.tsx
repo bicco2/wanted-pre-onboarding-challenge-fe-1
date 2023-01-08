@@ -14,6 +14,7 @@ function TodoCreate({ refetch }: any) {
   const [open, setOpen] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
+  const ACCESS_TOKEN = localStorage.getItem("accessToken");
 
   const onToggle = () => setOpen(!open);
   const onTitleChange = (e: any) => setTitleValue(e.target.value);
@@ -35,7 +36,7 @@ function TodoCreate({ refetch }: any) {
       },
       {
         headers: {
-          Authorization: `eyJhbGciOiJIUzI1NiJ9.dGVzdEBuYXZlci5jb20.mRAKd_fmy6r-v-6qNRhetzamOAjB890YhRrLKzGbsxs`,
+          Authorization: ACCESS_TOKEN,
         },
       }
     );
