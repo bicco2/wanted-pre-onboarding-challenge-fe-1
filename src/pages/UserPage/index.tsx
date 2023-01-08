@@ -78,9 +78,11 @@ const UserPage: React.FC = () => {
       <button
         disabled={checkTotal.current ? true : false}
         onClick={handleLogin}
+        style={{ marginBottom: 20 }}
       >
         login
       </button>
+      <a href="/signup">계정이 없으신가요?</a>
     </Wrapper>
   );
 };
