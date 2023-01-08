@@ -1,3 +1,4 @@
+import SignUpPage from "pages/SignUpPage";
 import { lazy } from "react";
 import GlobalLayout from "./pages/_layout";
 
@@ -11,6 +12,7 @@ export const routes = [
     children: [
       { path: "/auth", element: <UserPage /> },
       { path: "/todo", element: <TodoPage /> },
+      { path: "/signup", element: <SignUpPage /> },
     ],
   },
 ];
