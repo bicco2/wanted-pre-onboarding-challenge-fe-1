@@ -16,7 +16,6 @@ const UserPage: React.FC = () => {
     setUserId(e.target.value);
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    console.log("이메일 유효성 검사 :: ", regExp.test(e.target.value));
 
     if (regExp.test(e.target.value)) {
       checkId.current = true;
@@ -32,7 +31,6 @@ const UserPage: React.FC = () => {
   const onPwChange = (e: any) => {
     setUserPw(e.target.value);
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
-    console.log("비밀번호 유효성 검사 :: ", regExp.test(e.target.value));
     if (regExp.test(e.target.value)) {
       checkPw.current = true;
       if (checkId.current && checkPw.current) {
@@ -54,7 +52,6 @@ const UserPage: React.FC = () => {
       .then((res) => {
         console.log(res.data.token);
         navigate(`/todo`);
-        // 여기서 로컬스토리지로 res.data.token 값 저장해야함
         localStorage.setItem("accessToken", res.data.token);
       })
       .catch((err) => {
