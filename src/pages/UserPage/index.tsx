@@ -3,7 +3,7 @@ import { Wrapper, Label, Input } from "./styled";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const UserPage: React.FC = () => {
+const UserPage = () => {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const checkId = useRef(false);
@@ -11,6 +11,8 @@ const UserPage: React.FC = () => {
   const checkTotal = useRef(true);
 
   const navigate = useNavigate();
+
+  // console.log(props.tokenCheck);
 
   const onIdChange = (e: any) => {
     setUserId(e.target.value);
@@ -28,6 +30,7 @@ const UserPage: React.FC = () => {
       checkTotal.current = true;
     }
   };
+
   const onPwChange = (e: any) => {
     setUserPw(e.target.value);
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
@@ -51,8 +54,8 @@ const UserPage: React.FC = () => {
       })
       .then((res) => {
         console.log(res.data.token);
-        navigate(`/todo`);
         localStorage.setItem("accessToken", res.data.token);
+        navigate(`/todo`);
       })
       .catch((err) => {
         console.log(err);
